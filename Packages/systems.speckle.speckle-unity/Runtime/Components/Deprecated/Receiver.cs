@@ -70,7 +70,10 @@ namespace Speckle.ConnectorUnity
             OnErrorAction = onErrorAction;
             OnProgressAction = onProgressAction;
             OnTotalChildrenCountKnown = onTotalChildrenCountKnown;
-
+            if (account == null)
+            {
+                Debug.Log("account is null in Reciever");
+            }
             Client = new Client(account ?? AccountManager.GetDefaultAccount());
 
             if (AutoReceive)
@@ -159,7 +162,7 @@ namespace Speckle.ConnectorUnity
                 .Enqueue(() =>
                 {
                     var root = new GameObject() { name = commitId, };
-
+        
                     var rc = GetComponent<RecursiveConverter>();
                     var go = rc.RecursivelyConvertToNative(@base, root.transform);
                     //remove previously received object
